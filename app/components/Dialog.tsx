@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -30,7 +31,9 @@ const DialogComp = ({
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         {children}
-        <DialogFooter>{footer}</DialogFooter>
+        <DialogFooter>
+          <DialogClose asChild>{footer}</DialogClose>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

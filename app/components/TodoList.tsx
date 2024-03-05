@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import Actions from "./Actions";
+import Todo from "./Todo";
 
 interface ITodoList {
   todos: ITodos;
@@ -29,16 +29,7 @@ const TodoList = ({ todos }: ITodoList) => {
         </TableHeader>
         <TableBody>
           {todos.map((todo, _index) => (
-            <TableRow key={todo.id}>
-              <TableCell className="font-medium">{_index + 1}</TableCell>
-              <TableCell>{todo.title}</TableCell>
-              <TableCell>
-                <Actions />
-              </TableCell>
-              <TableCell className="text-right">
-                {todo.completed ? "Completed" : "Not completed"}
-              </TableCell>
-            </TableRow>
+            <Todo key={todo.id} {...todo} srNo={_index} />
           ))}
         </TableBody>
       </Table>

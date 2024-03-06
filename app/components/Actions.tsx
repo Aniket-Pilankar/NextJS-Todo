@@ -7,12 +7,14 @@ import DialogComp from "./Dialog";
 import { Input } from "@/components/ui/input";
 import { deleteTodo, updateTodo } from "../utils/helper";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface ActionProps {
   todo: ITodo;
 }
 
 const Actions = ({ todo }: ActionProps) => {
+  const router = useRouter();
   const [updatedTodoTitle, setupdatedTodoTitle] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,20 +33,23 @@ const Actions = ({ todo }: ActionProps) => {
       return;
     }
     await updateTodo(id, updatedTodoTitle);
+    router.refresh();
   };
 
   const handleDelete = (id: string) => async () => {
     await deleteTodo(id);
+    router.refresh();
   };
 
   const handleToggleChange = (todo: ITodo) => async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todos/${todo.id}`, {
+    await fetch(`https://js-admin-dashboard-ts.vercel.app/todos/${todo.id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({ completed: !todo.completed }),
     });
+    router.refresh();
   };
 
   return (

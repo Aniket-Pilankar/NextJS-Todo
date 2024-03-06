@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { nanoid } from "nanoid";
+import { useRouter } from "next/navigation";
 
 const initialState: ITodo = {
   id: "",
@@ -11,6 +12,7 @@ const initialState: ITodo = {
 };
 
 const AddTask = () => {
+  const router = useRouter();
   const [title, setTitle] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +37,8 @@ const AddTask = () => {
       body: JSON.stringify(newTodo),
     });
     console.log("res:", res);
+    setTitle("");
+    router.refresh();
   };
 
   return (

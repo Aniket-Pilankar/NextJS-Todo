@@ -42,7 +42,7 @@ const Actions = ({ todo }: ActionProps) => {
   };
 
   const handleToggleChange = (todo: ITodo) => async () => {
-    await fetch(`https://js-admin-dashboard-ts.vercel.app/todos/${todo.id}`, {
+    await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/todos/${todo.id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
